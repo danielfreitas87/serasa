@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "@actions": ["src/state/actions"],
+      "@components": ["src/ui/components"],
+      "@enums": ["src/enums"],
+      "@helpers": ["src/helpers"],
+      "@interfaces": ["src/interfaces"],
+      "@pages": ["src/ui/pages/"],
+      "@reducers": ["src/state/reducers"],
+      "@root": [""],
+      "@sagas": ["src/state/sagas"],
+      "@services": ["src/services"],
+      "@store": ["src/state/store"]
+    }
+  }
+}

@@ -1,7 +1,15 @@
 import React, { Component } from 'react'
+import { Col, Typography } from 'antd'
+import { StyledTitle } from '@components'
 
-export default class Home extends Component {
+const { Title } = Typography
+
+export default class HomePage extends Component {
   render() {
-    return <div>Home</div>
+    return (
+      <Col>
+        <StyledTitle label='Home' />
+      </Col>
+    )
   }
 }

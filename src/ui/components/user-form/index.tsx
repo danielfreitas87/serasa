@@ -1,14 +1,11 @@
 import React, { useState } from 'react'
-import {
-  Form,
-  Input,
-  Checkbox,
-  Button,
-} from 'antd'
-import { StyledGroupedRadio } from '../common'
-import { DocumentEnum } from '../../../enums'
-import { IRadio } from '../../../interfaces'
-import { capitalizeFirstLetter } from '../../../helpers'
+import { Form, Input, Checkbox } from 'antd'
+import { StyledButton, StyledGroupedRadio } from '@components'
+import { DocumentEnum } from '@enums'
+import { IRadio } from '@interfaces'
+import { capitalizeFirstLetter } from '@helpers'
+
+const { Item, useForm } = Form
 
 const documents = [
   {
@@ -26,22 +23,15 @@ type UserFormProps = {
   plantations: Array<string>
 }
 
-export const UserForm = ({
-  plantations,
-}: UserFormProps) => {
-  const [form] = Form.useForm()
-  const [
-    radioDocumentLabel,
-    setRadioDocumentLabel,
-  ] = useState<string>(DocumentEnum.CPF)
+export function UserForm({ plantations }: UserFormProps) {
+  const [form] = useForm()
+  const [radioDocumentLabel, setRadioDocumentLabel] = useState<string>(
+    DocumentEnum.CPF,
+  )
 
-  const onChangeDocument = (
-    radio: IRadio | undefined,
-  ) => {
+  const onChangeDocument = (radio: IRadio | undefined) => {
     if (radio) {
-      setRadioDocumentLabel(
-        radio?.label,
-      )
+      setRadioDocumentLabel(radio?.label)
     }
   }
   return (
@@ -57,81 +47,59 @@ export const UserForm = ({
       // onFinish={onFinish}
       // onFinishFailed={onFinishFailed}
     >
-      <Form.Item
+      <Item
         label='Nome'
         rules={[
           {
             required: true,
-            message:
-              'Favor digitar o nome!',
+            message: 'Favor digitar o nome!',
           },
         ]}
       >
         <Input />
-      </Form.Item>
-      <Form.Item label='Documento'>
-        <StyledGroupedRadio
-          radios={documents}
-          onChange={onChangeDocument}
-        />
-      </Form.Item>
-      <Form.Item
-        name='document'
-        label={radioDocumentLabel}
-      >
+      </Item>
+      <Item label='Documento'>
+        <StyledGroupedRadio radios={documents} onChange={onChangeDocument} />
+      </Item>
+      <Item name='document' label={radioDocumentLabel}>
         <Input />
-      </Form.Item>
-      <Form.Item label='Estado'>
+      </Item>
+      <Item label='Estado'>
         <Input />
-      </Form.Item>
-      <Form.Item
+      </Item>
+      <Item
         label='Cidade'
         rules={[
           {
             required: true,
-            message:
-              'Favor digitar a cidade!',
+            message: 'Favor digitar a cidade!',
           },
         ]}
       >
         <Input />
-      </Form.Item>
-      <Form.Item label='Área Total em Hectares'>
+      </Item>
+      <Item label='Área Total em Hectares'>
         <Input />
-      </Form.Item>
-      <Form.Item label='Área Agricultável em Hectares'>
+      </Item>
+      <Item label='Área Agricultável em Hectares'>
         <Input />
-      </Form.Item>
-      <Form.Item label='Área de Vegetação em Hectares'>
+      </Item>
+      <Item label='Área de Vegetação em Hectares'>
         <Input />
-      </Form.Item>
-      <Form.Item
-        valuePropName='checked'
-        label='Área Total em Hectares'
-      >
-        {plantations.map(
-          (plantation, index) => (
-            <Checkbox key={index}>
-              {capitalizeFirstLetter(
-                plantation,
-              )}
-            </Checkbox>
-          ),
-        )}
-      </Form.Item>
-      <Form.Item
+      </Item>
+      <Item valuePropName='checked' label='Área Total em Hectares'>
+        {plantations.map((plantation, index) => (
+          <Checkbox key={index}>{capitalizeFirstLetter(plantation)}</Checkbox>
+        ))}
+      </Item>
+      <Item
         wrapperCol={{
           offset: 8,
           span: 16,
         }}
       >
-        <Button
-          type='primary'
-          htmlType='submit'
-        >
-          Acessar
-        </Button>
-      </Form.Item>
+        <StyledButton label='CADASTRAR' />
+      </Item>
     </Form>
   )
 }

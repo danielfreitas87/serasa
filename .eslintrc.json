@@ -24,16 +24,32 @@
     "react",
     "react-hooks"
   ],
-	"rules": {
+  "rules": {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "no-underscore-dangle": ["off"],
-    "import/prefer-default-export": ["off"],
+    "import/prefer-default-export": [
+      "off"
+    ],
     "jsx-a11y/href-no-hash": ["off"],
-    "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx", ".tsx"] }],
-    "no-empty-function": ["error", { "allow": ["arrowFunctions"]}],
+    "react/jsx-filename-extension": [
+      "warn",
+      {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".tsx"
+        ]
+      }
+    ],
+    "no-empty-function": [
+      "error",
+      { "allow": ["arrowFunctions"] }
+    ],
     "semi": ["error", "never"],
-    "react/jsx-props-no-spreading": ["off"],
+    "react/jsx-props-no-spreading": [
+      "off"
+    ],
     "typescript-enum/no-enum": "off",
     "import/extensions": "off",
     "max-len": [

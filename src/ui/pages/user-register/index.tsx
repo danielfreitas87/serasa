@@ -1,16 +1,28 @@
-import React, { Component } from "react";
-import { Grid } from "antd";
-import { UserForm } from "../../components";
+import React, { Component } from 'react'
+import { Col, Typography } from 'antd'
+import { UserForm } from '@components'
 
-const plantations = ["soja", "milho", "algodão", "café", "cana de açúcar"];
+const { Title } = Typography
 
-export default class UserRegister extends Component {
+const plantations = [
+  'soja',
+  'milho',
+  'algodão',
+  'café',
+  'cana de açúcar',
+]
+
+export default class UserRegisterPage extends Component {
   render() {
     return (
-      <Grid>
-        <h1>Cadastre-se</h1>
-        <UserForm plantations={plantations} />
-      </Grid>
-    );
+      <Col>
+        <Title level={1}>
+          Cadastre-se
+        </Title>
+        <UserForm
+          plantations={plantations}
+        />
+      </Col>
+    )
   }
 }
