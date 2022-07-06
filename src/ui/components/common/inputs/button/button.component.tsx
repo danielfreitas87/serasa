@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Button as AntButton } from 'antd'
 import { IButton } from '@interfaces'
 
-export const Button = ({ label, className }: IButton) => (
-  <AntButton type='primary' htmlType='submit' block className={className}>
-    {label}
-  </AntButton>
-)
+export class Button extends Component<IButton> {
+  render() {
+    const { label } = this.props
+    return (
+      <AntButton {...this.props} block>
+        {label}
+      </AntButton>
+    )
+  }
+}

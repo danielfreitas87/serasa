@@ -4,6 +4,7 @@
       "@actions": ["src/state/actions"],
       "@components": ["src/ui/components"],
       "@enums": ["src/enums"],
+      "@errors": ["src/errors"],
       "@helpers": ["src/helpers"],
       "@interfaces": ["src/interfaces"],
       "@pages": ["src/ui/pages/"],

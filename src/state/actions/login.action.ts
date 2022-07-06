@@ -15,8 +15,9 @@ const doLoginSuccess = (payload: string) => ({
   payload,
 })
 
-const doLoginFailure = () => ({
+const doLoginFailure = (payload?: string) => ({
   type: DO_LOGIN_FAILURE,
+  payload,
 })
 
 export {

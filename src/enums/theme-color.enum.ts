@@ -1,4 +1,4 @@
 export enum ThemeColorEnum {
-  primary,
-  secondary,
+  primary = 'primary',
+  secondary = 'secondary',
 }

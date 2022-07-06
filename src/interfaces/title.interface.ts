@@ -1,8 +1,11 @@
 import { ThemeColorEnum } from '@enums'
+import { TitleProps } from 'antd/lib/typography/Title'
 
-export interface ITitle {
+export declare const ITitleLevel: [1, 2, 3, 4, 5]
+
+export interface ITitle extends TitleProps {
   label: string
-  level?: 3 | 1 | 5 | 2 | 4
+  level?: typeof ITitleLevel[number]
   color?: keyof typeof ThemeColorEnum
   className?: string
 }

@@ -25,7 +25,7 @@ export class LoginService extends BaseService {
 
     return {
       status: ApiResponseStatusEnum.SERVER_ERROR,
-      data: { message: 'Email ou senha inválido(s).' },
+      data: { error: 'Email e/ou senha inválido(s).' },
     }
 
     // return super.post(userLogin)

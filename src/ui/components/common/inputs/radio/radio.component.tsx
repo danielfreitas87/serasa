@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Radio as AntRadio } from 'antd'
 import { IRadio } from '@interfaces'
 
 const { Button } = AntRadio
 
-export const Radio = ({ label, className }: IRadio) => (
-  <Button className={className}>{label}</Button>
-)
+export class Radio extends Component<IRadio> {
+  render() {
+    const { label } = this.props
+    return <Button {...this.props}>{label}</Button>
+  }
+}

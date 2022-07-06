@@ -1,2 +1,2 @@
 export * from './common'
-export { UserForm } from './user-form'
+export * from './forms'

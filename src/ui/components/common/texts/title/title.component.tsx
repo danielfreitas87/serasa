@@ -1,20 +1,12 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Typography } from 'antd'
 import { ITitle } from '@interfaces'
 
 const AntTitle = Typography.Title
 
-const DEFAULT_LEVEL = 3
-
-export const Title = ({
-  level = DEFAULT_LEVEL,
-  label,
-  className,
-}: ITitle) => (
-  <AntTitle
-    level={level}
-    className={className}
-  >
-    {label}
-  </AntTitle>
-)
+export class Title extends Component<ITitle> {
+  render() {
+    const { label } = this.props
+    return <AntTitle {...this.props}>{label}</AntTitle>
+  }
+}
