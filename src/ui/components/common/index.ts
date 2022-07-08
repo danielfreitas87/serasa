@@ -1,4 +1,5 @@
 export * from './inputs'
 export * from './texts'
-export * from './spinner'
+export * from './assets'
+export { StyledSpinner } from './spinner'
 export { StyledGroupedRadio } from './radio-group'

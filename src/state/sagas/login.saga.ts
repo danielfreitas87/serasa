@@ -5,7 +5,7 @@ import { DO_LOGIN, doLoginSuccess, doLoginFailure } from '@actions'
 import { IApiResponseLogin } from '@interfaces'
 import { isApiResponseStatusOk } from '@helpers'
 
-const delay = () => new Promise((res) => setTimeout(res, 10000))
+const delay = () => new Promise((res) => setTimeout(res, 2000))
 
 function* _doLogin({ payload }: AnyAction) {
   try {

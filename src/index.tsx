@@ -2,12 +2,11 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import reportWebVitals from './reportWebVitals'
+import { BrowserRouter } from 'react-router-dom'
 import { store, persistor } from '@store'
-import { AuthPage, HomePage, LoginPageConnected } from '@pages'
+import reportWebVitals from './reportWebVitals'
 import { ThemeProvider } from 'styled-components'
-import { PathAliasEnum } from './enums/path-alias.enum'
+import { Router } from '@routes'
 import GlobalStyles from './styles/global.style'
 import { defaultTheme } from './styles/custom-theme.style'
 import './styles/antd.style.less'
@@ -21,15 +20,7 @@ root.render(
         <ThemeProvider theme={defaultTheme}>
           <GlobalStyles />
           <BrowserRouter>
-            <Routes>
-              <Route element={<AuthPage />}>
-                <Route path={PathAliasEnum.HOME} element={<HomePage />} />
-                <Route
-                  path={PathAliasEnum.LOGIN}
-                  element={<LoginPageConnected />}
-                />
-              </Route>
-            </Routes>
+            <Router />
           </BrowserRouter>
         </ThemeProvider>
       </PersistGate>

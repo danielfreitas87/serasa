@@ -1,4 +1,4 @@
-import { IBaseState } from './base-state'
+import { IBaseState } from './base-state.interface'
 
 export interface IUserLogin {
   email: string

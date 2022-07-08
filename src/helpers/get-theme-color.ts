@@ -1,6 +1,6 @@
 import { ThemeColorEnum } from '@enums'
 
-const getColor = (theme: any, color: keyof typeof ThemeColorEnum) => {
+function getColor(theme: any, color: keyof typeof ThemeColorEnum) {
   switch (color) {
     case ThemeColorEnum.primary:
       return theme.colors.primary
@@ -11,6 +11,9 @@ const getColor = (theme: any, color: keyof typeof ThemeColorEnum) => {
   }
 }
 
-export default (theme: any, color: keyof typeof ThemeColorEnum | undefined) => {
+export function getThemeColor(
+  theme: any,
+  color: keyof typeof ThemeColorEnum | undefined,
+) {
   return getColor(theme, color || ThemeColorEnum.primary)
 }

@@ -20,7 +20,7 @@ export class Spinner extends Component<ISpinner> {
     const { color } = this.props
     return (
       <Col {...this.props}>
-        <AntSpin indicator={<Icon color={color} />} {...this.props} />
+        <AntSpin indicator={<Icon color={color} />} />
       </Col>
     )
   }

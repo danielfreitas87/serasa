@@ -2,6 +2,7 @@
   "compilerOptions": {
     "paths": {
       "@actions": ["src/state/actions"],
+      "@assets": ["src/assets"],
       "@components": ["src/ui/components"],
       "@enums": ["src/enums"],
       "@errors": ["src/errors"],
@@ -9,7 +10,7 @@
       "@interfaces": ["src/interfaces"],
       "@pages": ["src/ui/pages/"],
       "@reducers": ["src/state/reducers"],
-      "@root": [""],
+      "@routes": ["src/routes"],
       "@sagas": ["src/state/sagas"],
       "@services": ["src/services"],
       "@store": ["src/state/store"]

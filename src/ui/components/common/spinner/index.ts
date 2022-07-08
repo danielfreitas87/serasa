@@ -21,7 +21,7 @@ export const StyledSpinner = styled(Spinner)`
     justify-content: center;
     align-items: center;
   }
-  &.ant-spin {
+  &.ant-col > .ant-spin {
     font-size: 48px;
     ${(props) => {
       const themeColor = getThemeColor(props.theme, props?.color)

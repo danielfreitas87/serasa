@@ -21,7 +21,7 @@ const documents = [
 
 const crops = ['soja', 'milho', 'algodão', 'café', 'cana de açúcar']
 
-export class UserForm extends Component {
+export class ProducerForm extends Component {
   formRef = createRef<FormInstance>()
 
   state = {

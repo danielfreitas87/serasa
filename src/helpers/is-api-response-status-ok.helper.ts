@@ -1,6 +1,5 @@
 import { ApiResponseStatusEnum } from '@enums'
 
-export default (status: number) =>
-  status &&
-  status ===
-    ApiResponseStatusEnum.SUCCESS
+export function isApiResponseStatusOk(status: number) {
+  return status && status === ApiResponseStatusEnum.SUCCESS
+}
