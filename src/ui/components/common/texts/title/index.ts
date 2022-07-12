@@ -10,6 +10,8 @@ const defaultProps = {
 }
 
 export const StyledTitle = styled(Title)`
+  text-align: center;
+  padding-bottom: 20px;
   &.ant-typography {
     ${(props) => {
       const themeColor = getThemeColor(props.theme, props?.color)

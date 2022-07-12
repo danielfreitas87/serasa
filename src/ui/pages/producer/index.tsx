@@ -1,2 +1,2 @@
-export { ProducerEditPage } from './producer-edit'
-export { ProducersListPage } from './producers-list'
+export { ProducerEditPageConnected } from './producer-edit'
+export { ProducersListPageConnected } from './producers-list'

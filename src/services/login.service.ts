@@ -1,22 +1,14 @@
 import { IUserLogin } from '@interfaces'
 import { encrypt } from '@helpers'
 import BaseService from './base.service'
-import { ApiResponseStatusEnum, PathAliasEnum } from '@enums'
-
-const mockedLogin = {
-  email: 'teste@serasa.com',
-  password: 'serasa@123',
-}
+import { ApiResponseStatusEnum } from '@enums'
+import { MOCKED_USER_LOGIN } from './login.mocked'
 
 export class LoginService extends BaseService {
-  constructor() {
-    super(PathAliasEnum.LOGIN)
-  }
-
   doLogin(userLogin: IUserLogin) {
     if (
-      userLogin.email === mockedLogin.email &&
-      userLogin.password === mockedLogin.password
+      userLogin.email === MOCKED_USER_LOGIN.email &&
+      userLogin.password === MOCKED_USER_LOGIN.password
     )
       return {
         status: ApiResponseStatusEnum.SUCCESS,

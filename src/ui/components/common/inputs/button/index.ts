@@ -15,7 +15,7 @@ export const StyledButton = styled(Button)`
   &.ant-btn-primary {
     border-radius: 5px;
     ${(props) => {
-      const themeColor = getThemeColor(props.theme, props.color)
+      const themeColor = getThemeColor(props.theme, props?.color)
       return (
         themeColor &&
         [

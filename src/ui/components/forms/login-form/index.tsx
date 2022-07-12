@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Alert, Form, Input } from 'antd'
 import { StyledButton } from '@components'
-import { loginErrorMessage } from '@errors'
+import { loginRules } from '@validations'
 import { IUserLogin } from '@interfaces'
 
 const { Item } = Form
@@ -16,22 +16,13 @@ export class LoginForm extends Component<Props> {
 
   render() {
     const { errorMessage } = this.props
+    const { emailRules, passwordRules } = loginRules
     return (
       <Form layout='vertical' onFinish={this.submitForm}>
-        <Item
-          name='email'
-          label='Email'
-          required
-          rules={loginErrorMessage.email}
-        >
+        <Item name='email' label='Seu e-mail' required rules={emailRules}>
           <Input />
         </Item>
-        <Item
-          name='password'
-          label='Senha'
-          required
-          rules={loginErrorMessage.password}
-        >
+        <Item name='password' label='Sua senha' required rules={passwordRules}>
           <Input type='password' />
         </Item>
 
@@ -40,7 +31,6 @@ export class LoginForm extends Component<Props> {
             <Alert message={errorMessage} type='error' />
           </Item>
         )}
-
         <Item>
           <StyledButton label='ACESSAR' />
         </Item>

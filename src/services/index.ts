@@ -1,1 +1,5 @@
+export { AddressService } from './address.service'
+export { CropsService } from './crops.service'
 export { LoginService } from './login.service'
+export { ProducerService } from './producer.service'
+export { MOCKED_UFS } from './address.mocked'

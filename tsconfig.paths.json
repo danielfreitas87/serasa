@@ -5,7 +5,6 @@
       "@assets": ["src/assets"],
       "@components": ["src/ui/components"],
       "@enums": ["src/enums"],
-      "@errors": ["src/errors"],
       "@helpers": ["src/helpers"],
       "@interfaces": ["src/interfaces"],
       "@pages": ["src/ui/pages/"],
@@ -13,7 +12,8 @@
       "@routes": ["src/routes"],
       "@sagas": ["src/state/sagas"],
       "@services": ["src/services"],
-      "@store": ["src/state/store"]
+      "@store": ["src/state/store"],
+      "@validations": ["src/validations"]
     }
   }
 }

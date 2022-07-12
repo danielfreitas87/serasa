@@ -3,10 +3,14 @@ import { Button as AntButton } from 'antd'
 import { IButton } from '@interfaces'
 
 export class Button extends Component<IButton> {
+  constructor(props: IButton) {
+    super(props)
+  }
+
   render() {
-    const { label } = this.props
+    const { label, ...rest } = this.props
     return (
-      <AntButton {...this.props} block>
+      <AntButton {...rest} block>
         {label}
       </AntButton>
     )

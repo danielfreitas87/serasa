@@ -1,8 +1,16 @@
 import { combineReducers } from 'redux'
-import login, { loginInitialState } from './login.reducer'
+import address from './address.reducer'
+import crops from './crops.reducer'
+import login from './login.reducer'
+import producers from './producer.reducer'
+import page from './page.reducer'
 
-export { login, loginInitialState }
+export const persistBlacklisted = ['address', 'producers', 'page']
 
 export default combineReducers({
+  address,
+  crops,
   login,
+  producers,
+  page,
 })

@@ -1,7 +1,7 @@
-import { LayoutHeader } from './layout-header.component'
+import { LayoutHeaderConnected } from './layout-header.component'
 import styled from 'styled-components'
 
-export const StyledLayoutHeader = styled(LayoutHeader)`
+export const StyledLayoutHeader = styled(LayoutHeaderConnected)`
   &.ant-layout-header {
     background: rgb(2, 0, 36);
     background: -moz-linear-gradient(

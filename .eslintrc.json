@@ -18,38 +18,23 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": [
-    "@typescript-eslint",
-    "prettier",
-    "react",
-    "react-hooks"
-  ],
+  "plugins": ["@typescript-eslint", "prettier", "react", "react-hooks"],
   "rules": {
+    "@typescript-eslint/no-explicit-any": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "no-underscore-dangle": ["off"],
-    "import/prefer-default-export": [
-      "off"
-    ],
+    "import/prefer-default-export": ["off"],
     "jsx-a11y/href-no-hash": ["off"],
     "react/jsx-filename-extension": [
       "warn",
       {
-        "extensions": [
-          ".js",
-          ".jsx",
-          ".tsx"
-        ]
+        "extensions": [".js", ".jsx", ".tsx"]
       }
     ],
-    "no-empty-function": [
-      "error",
-      { "allow": ["arrowFunctions"] }
-    ],
+    "no-empty-function": ["error", { "allow": ["arrowFunctions"] }],
     "semi": ["error", "never"],
-    "react/jsx-props-no-spreading": [
-      "off"
-    ],
+    "react/jsx-props-no-spreading": ["off"],
     "typescript-enum/no-enum": "off",
     "import/extensions": "off",
     "max-len": [

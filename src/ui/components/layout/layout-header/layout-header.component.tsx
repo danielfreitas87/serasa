@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import { Layout, Row, Col } from 'antd'
-import { MainHeaderLogo } from '@assets'
+import { connect } from 'react-redux'
+import { doLogout } from '@actions'
 import { StyledButton, StyledIcon, StyledImage } from '@components'
-import { LoginOutlined } from '@ant-design/icons'
+import { LogoutOutlined } from '@ant-design/icons'
+import { MainHeaderLogo } from '@assets'
+import { RootState } from '@store'
 
 const { Header } = Layout
 
@@ -16,22 +19,46 @@ const loginButtonVisibility = {
   md: { span: 24 },
 }
 
-export class LayoutHeader extends Component {
+type Props = {
+  token: string
+  doLogoutDispatched: () => void
+}
+
+class LayoutHeader extends Component<Props> {
   render() {
+    const { token, doLogoutDispatched, ...rest } = this.props
     return (
-      <Header {...this.props}>
+      <Header {...rest}>
         <Row justify='space-between' align='middle'>
           <StyledImage src={MainHeaderLogo} />
-          <Row justify='center' align='middle'>
-            <Col {...loginIconVisibility}>
-              <StyledIcon component={LoginOutlined} />
-            </Col>
-            <Col {...loginButtonVisibility}>
-              <StyledButton label='Entrar' />
-            </Col>
-          </Row>
+          {token && (
+            <Row justify='center' align='middle'>
+              <Col {...loginIconVisibility}>
+                <StyledIcon
+                  component={LogoutOutlined}
+                  onClick={doLogoutDispatched}
+                />
+              </Col>
+              <Col {...loginButtonVisibility}>
+                <StyledButton label='Sair' onClick={doLogoutDispatched} />
+              </Col>
+            </Row>
+          )}
         </Row>
       </Header>
     )
   }
 }
+
+const mapStateToProps = ({ login }: RootState) => ({
+  token: login.token,
+})
+
+const mapDispatchToProps = {
+  doLogoutDispatched: doLogout,
+}
+
+export const LayoutHeaderConnected = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(LayoutHeader)

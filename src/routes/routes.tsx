@@ -1,21 +1,25 @@
 import React from 'react'
 import { IMenuItem } from '@interfaces'
-import { HomePage, ProducerEditPage, ProducersListPage } from '@pages'
+import {
+  HomePageConnected,
+  ProducerEditPageConnected,
+  ProducersListPageConnected,
+} from '@pages'
 
 export const AuthRoutes: Array<IMenuItem> = [
   {
-    render: <HomePage />,
+    render: <HomePageConnected />,
     label: 'Painel',
   },
   {
     label: 'Produtores',
     children: [
       {
-        render: <ProducersListPage />,
+        render: <ProducersListPageConnected />,
         label: 'Lista de Produtores',
       },
       {
-        render: <ProducerEditPage />,
+        render: <ProducerEditPageConnected />,
         label: 'Editar Produtores',
       },
     ],

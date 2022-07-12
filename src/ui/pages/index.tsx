@@ -1,12 +1,15 @@
 import AuthPage from './auth'
-import HomePage from './home'
+import HomePageConnected from './home'
 import LoginPageConnected from './login'
-import { ProducerEditPage, ProducersListPage } from './producer'
+import {
+  ProducerEditPageConnected,
+  ProducersListPageConnected,
+} from './producer'
 
 export {
   AuthPage,
-  HomePage,
+  HomePageConnected,
   LoginPageConnected,
-  ProducerEditPage,
-  ProducersListPage,
+  ProducerEditPageConnected,
+  ProducersListPageConnected,
 }
