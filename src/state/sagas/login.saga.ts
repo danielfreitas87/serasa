@@ -5,7 +5,7 @@ import { DO_LOGIN, DO_LOGOUT, doLoginSuccess, doLoginFailure } from '@actions'
 import { ILoginResponse } from '@interfaces'
 import { isApiResponseStatusOk } from '@helpers'
 
-const delay = () => new Promise((res) => setTimeout(res, 2000))
+const delay = () => new Promise((res) => setTimeout(res, 1000))
 
 const PERSIST_ROOT_STORAGE = 'persist:root'
 

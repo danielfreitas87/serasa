@@ -85,6 +85,7 @@ const columns: ColumnsType<IProducer> = [
 
 type Props = {
   producers: Array<IProducer>
+  isLoading: boolean
   fetchProducersDispatched: () => void
 }
 
@@ -98,6 +99,7 @@ class ProducersListPage extends Component<Props> {
   }
 
   render() {
+    const { producers, isLoading } = this.props
     return (
       <Row justify='center'>
         <Col>
@@ -106,10 +108,11 @@ class ProducersListPage extends Component<Props> {
           </Row>
           <Table
             columns={columns}
-            dataSource={this.props.producers}
+            dataSource={producers}
             bordered
             size='middle'
             scroll={{ x: 1500 }}
+            loading={isLoading}
           />
         </Col>
       </Row>
@@ -119,6 +122,7 @@ class ProducersListPage extends Component<Props> {
 
 const mapStateToProps = ({ producers }: RootState) => ({
   producers: producers.producers,
+  isLoading: producers.loading,
 })
 
 const mapDispatchToProps = {
