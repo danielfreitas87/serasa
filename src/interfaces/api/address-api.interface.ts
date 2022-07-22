@@ -1,11 +1,7 @@
-interface IAddressResponse {
+interface IAddress {
   nome: string
 }
 
-export interface ICitiesResponse {
-  data: Array<IAddressResponse>
-}
-
-export interface IUFsResponse {
-  data: Array<string>
+export interface IAddressApi {
+  data: Array<IAddress>
 }

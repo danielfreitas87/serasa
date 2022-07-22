@@ -11,12 +11,12 @@ export class LoginService {
     )
       return {
         status: ApiResponseStatusEnum.SUCCESS,
-        data: { token: encrypt(JSON.stringify(userLogin)) },
+        token: encrypt(JSON.stringify(userLogin)),
       }
 
     return {
       status: ApiResponseStatusEnum.SERVER_ERROR,
-      data: { error: 'Email e/ou senha inválido(s).' },
+      error: 'Email e/ou senha inválido(s).',
     }
   }
 }

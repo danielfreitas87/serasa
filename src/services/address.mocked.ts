@@ -1,4 +1,4 @@
-export const MOCKED_UFS = [
+export const MOCKED_UFS: Array<string> = [
   'AC',
   'AL',
   'AM',

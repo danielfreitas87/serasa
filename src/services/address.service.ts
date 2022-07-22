@@ -3,7 +3,7 @@ import { MOCKED_UFS } from './address.mocked'
 
 export class AddressService extends BaseService {
   fetchUFs() {
-    return { data: MOCKED_UFS.map((uf) => ({ value: uf })) }
+    return MOCKED_UFS.map((uf) => ({ value: uf }))
   }
 
   fetchCities(UF: string) {

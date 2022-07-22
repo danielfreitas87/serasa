@@ -9,14 +9,14 @@ import {
   FETCH_UFS,
   FETCH_CITIES,
 } from '@actions'
-import { IUFsResponse, ICitiesResponse } from '@interfaces'
+import { IAddressApi } from '@interfaces'
 
 function* _fetchUFs() {
   try {
     const addressService = new AddressService()
-    const response: IUFsResponse = yield addressService.fetchUFs()
-    if (response.data) {
-      yield put(fetchUFsSuccess(response.data))
+    const response: Array<string> = yield addressService.fetchUFs()
+    if (response.length) {
+      yield put(fetchUFsSuccess(response))
     } else {
       yield put(fetchUFsFailure())
     }
@@ -28,8 +28,8 @@ function* _fetchUFs() {
 function* _fetchCities({ payload }: AnyAction) {
   try {
     const addressService = new AddressService()
-    const response: ICitiesResponse = yield addressService.fetchCities(payload)
-    if (response.data) {
+    const response: IAddressApi = yield addressService.fetchCities(payload)
+    if (response.data.length) {
       const cities = response.data
         .map((city) => city.nome)
         .sort()
