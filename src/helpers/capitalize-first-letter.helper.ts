@@ -1,3 +1,5 @@
 export function capitalizeFirstLetter(text: string) {
-  return text.charAt(0).toUpperCase() + text.slice(1)
+  if (!text) return
+  const formattedText = text.toLowerCase()
+  return formattedText.charAt(0).toUpperCase() + formattedText.slice(1)
 }

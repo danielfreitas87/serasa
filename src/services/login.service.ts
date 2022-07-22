@@ -1,10 +1,9 @@
 import { IUserLogin } from '@interfaces'
 import { encrypt } from '@helpers'
-import BaseService from './base.service'
 import { ApiResponseStatusEnum } from '@enums'
 import { MOCKED_USER_LOGIN } from './login.mocked'
 
-export class LoginService extends BaseService {
+export class LoginService {
   doLogin(userLogin: IUserLogin) {
     if (
       userLogin.email === MOCKED_USER_LOGIN.email &&
@@ -19,7 +18,5 @@ export class LoginService extends BaseService {
       status: ApiResponseStatusEnum.SERVER_ERROR,
       data: { error: 'Email e/ou senha inválido(s).' },
     }
-
-    // return super.post(userLogin)
   }
 }

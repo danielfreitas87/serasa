@@ -18,9 +18,7 @@ export const mapSoilToChartData = (producers: Array<IProducer>) => {
         type: soil.type,
         value:
           (prevData.value || 0) +
-          (index === 0
-            ? producer.farmableAreaAcre
-            : producer.vegetationAreaAcre),
+          (index === 0 ? producer.farmableAcre : producer.vegetationAcre),
       }),
       {} as IChart,
     ),
@@ -63,9 +61,11 @@ export const mapCropsToChartData = (
   return cropsToChartData.filter((crop) => crop.value !== 0)
 }
 
-export const getTotalAreaAcre = (producers: Array<IProducer>) =>
-  producers.reduce(
-    (prevTotalArea: number, currProducer: IProducer) =>
-      prevTotalArea + currProducer.totalAreaAcre,
+export const getTotalAcre = (producers: Array<IProducer>) => {
+  if (!producers?.length) return 0
+  return producers.reduce(
+    (prevTotalAcre: number, currProducer: IProducer) =>
+      prevTotalAcre + currProducer.totalAcre,
     0,
   )
+}

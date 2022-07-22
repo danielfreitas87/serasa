@@ -16,8 +16,8 @@ import {
 import { IProducer } from '@interfaces'
 import { ProducerService } from '@services'
 
-const PRODUCER_EDIT = 3
 const PRODUCERS_LIST = 2
+const PRODUCER_EDIT = 3
 
 function* _fetchProducers() {
   try {
@@ -66,7 +66,7 @@ function* _removeProducer({ payload }: AnyAction) {
   }
 }
 
-function* _setEditingProducer({ payload }: AnyAction) {
+function* _setEditingProducer() {
   yield put(changeCurrentPage(PRODUCER_EDIT))
 }
 

@@ -6,14 +6,14 @@ export interface IProducer {
   document: string
   state: string
   city: string
-  farmableAreaAcre: number
-  vegetationAreaAcre: number
-  totalAreaAcre: number
+  farmableAcre: number
+  vegetationAcre: number
+  totalAcre: number
   crops: Array<string>
 }
 
 export interface IProducerState extends IBaseState {
-  producers: Array<IProducer>
+  producers: Array<IProducer> | null
   editingProducer: IProducer | null
   isEditing: boolean
 }

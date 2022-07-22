@@ -4,7 +4,8 @@ import { getThemeColor } from '@helpers'
 import { ThemeColorEnum } from '@enums'
 
 const defaultProps = {
-  color: ThemeColorEnum.secondary,
+  color: ThemeColorEnum.primary,
+  size: 18,
 }
 
 export const StyledEditProducerButton = styled(EditProducerButtonConnected)`

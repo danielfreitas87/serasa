@@ -1,7 +1,5 @@
 export const formError = {
+  name: 'O nome precisa conter ao menos 3 caracteres.',
   document: (documentType: string) => `${documentType} inválido.`,
-  totalAreaAcre: {
-    total: 'A soma das áreas não pode ser superior ao total da fazenda.',
-    min: 'Este valor não pode ser 0.',
-  },
+  totalAcre: 'A soma das áreas não pode ser superior ao total da fazenda.',
 }

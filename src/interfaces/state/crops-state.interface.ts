@@ -1,5 +1,5 @@
 import { IBaseState } from '@interfaces'
 
 export interface ICropsState extends IBaseState {
-  crops: Array<string>
+  crops: Array<string> | null
 }

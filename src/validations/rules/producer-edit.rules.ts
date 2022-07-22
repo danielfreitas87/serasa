@@ -1,13 +1,17 @@
+import {
+  documentValidator,
+  minLengthRules,
+  totalAcreValidator,
+} from '../validators'
 import { requiredRules } from './required.rules'
-import { documentValidator, totalAreaAcreValidator } from '../validators'
 
 export const producerEditRules = {
-  nameRules: [requiredRules],
+  nameRules: [requiredRules, minLengthRules],
   documentRules: [requiredRules, documentValidator],
   stateRules: [requiredRules],
   cityRules: [requiredRules],
-  totalAreaAcreRules: [requiredRules, totalAreaAcreValidator],
-  farmableAreaAcreRules: [requiredRules, totalAreaAcreValidator],
-  vegetationAreaAcreRules: [requiredRules, totalAreaAcreValidator],
+  totalAcreRules: [requiredRules, totalAcreValidator],
+  farmableAcreRules: [requiredRules, totalAcreValidator],
+  vegetationAcreRules: [requiredRules, totalAcreValidator],
   cropsRules: [requiredRules],
 }

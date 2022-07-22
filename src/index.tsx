@@ -14,18 +14,16 @@ import './styles/antd.style.less'
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <ThemeProvider theme={defaultTheme}>
-          <GlobalStyles />
-          <BrowserRouter>
-            <Router />
-          </BrowserRouter>
-        </ThemeProvider>
-      </PersistGate>
-    </Provider>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <PersistGate persistor={persistor}>
+      <ThemeProvider theme={defaultTheme}>
+        <GlobalStyles />
+        <BrowserRouter>
+          <Router />
+        </BrowserRouter>
+      </ThemeProvider>
+    </PersistGate>
+  </Provider>,
 )
 
 reportWebVitals()

@@ -11,16 +11,25 @@ import {
   StyledCheckboxGroup,
   StyledDivider,
 } from '@components'
-import { DocumentEnum } from '@enums'
+import { DocumentEnum, ProducerEnum } from '@enums'
 import { IColSpan, IProducer } from '@interfaces'
 import { cnpjMask, cpfMask, producerEditRules } from '@validations'
-import { fetchCities, fetchCrops, fetchUFs, setEditingProducer } from '@actions'
+import { fetchCities, fetchCrops, fetchUFs } from '@actions'
+import { DefaultOptionType } from 'antd/lib/select'
 import {
   PRODUCER_FORM_DOCUMENT_TYPES,
-  PRODUCER_FORM_HECTARES,
   PRODUCER_FORM_INITIAL_VALUES,
-} from './producer-form.mocked'
-import { DefaultOptionType } from 'antd/lib/select'
+} from './producer-form.data'
+
+const PRODUCER_FORM_HECTARES = '* Área em hectares'
+
+const buttonLabel = (editingPoducer: IProducer | null) =>
+  editingPoducer ? 'Alterar' : 'Cadastrar'
+
+const getRadioLabel = (editingProducer: IProducer | null) =>
+  editingProducer && editingProducer.document.length > 14
+    ? DocumentEnum.CNPJ
+    : DocumentEnum.CPF
 
 const { Item } = Form
 
@@ -52,7 +61,7 @@ const responsiveCity: IColSpan = {
   lg: { span: 16 },
 }
 
-const responsiveTotalAreaAcre: IColSpan = {
+const responsiveTotalAcre: IColSpan = {
   xs: { span: 24 },
   sm: { span: 12 },
   md: { span: 12 },
@@ -60,7 +69,7 @@ const responsiveTotalAreaAcre: IColSpan = {
   xl: { span: 8 },
 }
 
-const responsiveFarmableAreaAcre: IColSpan = {
+const responsiveFarmableAcre: IColSpan = {
   xs: { span: 24 },
   sm: { span: 11 },
   md: { span: 11 },
@@ -68,7 +77,7 @@ const responsiveFarmableAreaAcre: IColSpan = {
   xl: { span: 7 },
 }
 
-const responsiveVegetationAreaAcre: IColSpan = {
+const responsiveVegetationAcre: IColSpan = {
   xs: { span: 24 },
   sm: { span: 11 },
   md: { span: 11 },
@@ -85,99 +94,132 @@ type Props = {
   fetchCropsDispatched: () => void
   fetchCitiesDispatched: (UF: string) => void
   fetchUFsDispatched: () => void
-  setEditingProducerDispatched: (producer: IProducer | null) => void
   onFinish: (value: any) => void
 }
 
 type State = {
+  submitDisabled: boolean
   radioLabel: DocumentEnum
+  document: string
 }
 
 class ProducerForm extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
+    const { editingProducer } = this.props
     this.state = {
-      radioLabel: DocumentEnum.CPF,
+      submitDisabled: true,
+      radioLabel: getRadioLabel(editingProducer),
+      document: this.props.editingProducer
+        ? this.props.editingProducer.document
+        : '',
     }
-
-    this.onChangeDocumentType = this.onChangeDocumentType.bind(this)
   }
 
   formRef = createRef<FormInstance>()
 
   componentDidMount() {
-    if (this.props.editingProducer) {
-      this.formRef.current?.setFieldsValue(this.props.editingProducer)
+    const {
+      editingProducer,
+      fetchUFsDispatched,
+      fetchCropsDispatched,
+      fetchCitiesDispatched,
+    } = this.props
+
+    fetchCropsDispatched()
+    fetchUFsDispatched()
+
+    if (editingProducer) {
+      fetchCitiesDispatched(editingProducer.state)
+      this.formRef.current?.setFieldsValue(editingProducer)
     }
-    this.props.fetchCropsDispatched()
-    this.props.fetchUFsDispatched()
   }
 
-  setRadioValue = () =>
-    this.props.editingProducer &&
-    this.props.editingProducer.document.length > 14
+  setRadioValue = () => {
+    const { editingProducer } = this.props
+    return editingProducer && editingProducer.document.length > 14
       ? DocumentEnum.CNPJ
       : DocumentEnum.CPF
+  }
+
+  filterState = (input: string, option: any) =>
+    (option?.children as unknown as string)
+      .toLowerCase()
+      .includes(input.toLowerCase())
 
   filterCity = (input: string, option: any) =>
     (option?.children as unknown as string)
       .toLowerCase()
       .includes(input.toLowerCase())
 
-  onSelectUF = (value: string) => this.props.fetchCitiesDispatched(value)
+  onSelectUF = (uf: string) => {
+    this.formRef.current?.resetFields([ProducerEnum.CITY])
+    this.props.fetchCitiesDispatched(uf)
+  }
 
-  resetDocumentValue = () => {
-    this.formRef.current?.setFieldsValue({ document: '' })
+  resetDocument = () => {
+    this.setState({ [ProducerEnum.DOCUMENT]: '' })
+    this.formRef.current?.resetFields([ProducerEnum.DOCUMENT])
   }
 
   onChangeDocumentType = (event: RadioChangeEvent) => {
-    this.setState({ radioLabel: event.target.value as DocumentEnum })
+    this.setState({
+      radioLabel: event.target.value as DocumentEnum,
+    })
+    this.resetDocument()
   }
 
   onSubmit = (producer: IProducer) => {
-    const producerKey = this.props.editingProducer?.key && {
-      key: Number(this.props.editingProducer.key),
-    }
+    const { editingProducer, onFinish } = this.props
+    const producerKey =
+      editingProducer?.key || Number(editingProducer?.key) === 0
+        ? {
+            key: editingProducer?.key,
+          }
+        : undefined
     const producerWithKey = {
       ...producer,
       ...producerKey,
     }
-    this.props.onFinish(producerWithKey)
+
+    onFinish(producerWithKey)
   }
 
-  setDocumentMask = () => {
-    if (this.props.editingProducer)
-      return this.props.editingProducer.document.length > 14
-        ? cnpjMask
-        : cpfMask
-    return this.state.radioLabel === DocumentEnum.CPF ? cpfMask : cnpjMask
+  setDocumentMask = () =>
+    this.state.radioLabel === DocumentEnum.CPF ? cpfMask : cnpjMask
+
+  disableSubmit = () => {
+    const { editingProducer } = this.props
+    const formValues = this.formRef.current?.getFieldsValue()
+    this.setState({
+      submitDisabled:
+        JSON.stringify(editingProducer) === JSON.stringify(formValues),
+    })
   }
 
   render() {
-    const { crops, ufs, cities, citiesLoading, fetchCitiesDispatched } =
-      this.props
-    const { radioLabel } = this.state
+    const { editingProducer, crops, ufs, cities, citiesLoading } = this.props
+    const { radioLabel, submitDisabled } = this.state
     const {
       nameRules,
       documentRules,
       stateRules,
       cityRules,
-      totalAreaAcreRules,
-      farmableAreaAcreRules,
-      vegetationAreaAcreRules,
+      totalAcreRules,
+      farmableAcreRules,
+      vegetationAcreRules,
       cropsRules,
     } = producerEditRules
     return (
       <Form
-        name='basic'
         autoComplete='off'
         layout='vertical'
         ref={this.formRef}
-        initialValues={PRODUCER_FORM_INITIAL_VALUES}
         onFinish={this.onSubmit}
-        // onFinishFailed={onFinishFailed}
+        onValuesChange={this.disableSubmit}
+        initialValues={PRODUCER_FORM_INITIAL_VALUES}
       >
-        <Item name='name' label='Nome' rules={nameRules}>
+        <Item label='Nome' name={ProducerEnum.NAME} rules={nameRules}>
           <Input />
         </Item>
         <Row justify='space-between'>
@@ -191,26 +233,32 @@ class ProducerForm extends Component<Props, State> {
             </Item>
           </Col>
           <Col {...responsiveDocument}>
-            <Item name='document' label={radioLabel} rules={documentRules}>
+            <Item
+              label={radioLabel}
+              name={ProducerEnum.DOCUMENT}
+              rules={documentRules}
+            >
               <MaskedInput
                 mask={this.setDocumentMask()}
-                value={this.props.editingProducer?.document}
+                defaultValue={this.state.document}
               />
             </Item>
           </Col>
         </Row>
         <Row justify='space-between'>
           <Col {...responsiveState}>
-            <Item name='state' label='Estado' rules={stateRules}>
+            <Item label='Estado' name={ProducerEnum.STATE} rules={stateRules}>
               <StyledSelect
+                showSearch
                 options={ufs}
                 loading={citiesLoading}
-                onSelect={fetchCitiesDispatched}
+                filterOption={this.filterState}
+                onSelect={this.onSelectUF}
               />
             </Item>
           </Col>
           <Col {...responsiveCity}>
-            <Item name='city' label='Cidade' rules={cityRules}>
+            <Item label='Cidade' name={ProducerEnum.CITY} rules={cityRules}>
               <StyledSelect
                 showSearch
                 options={cities}
@@ -221,47 +269,53 @@ class ProducerForm extends Component<Props, State> {
         </Row>
         <StyledDivider label={PRODUCER_FORM_HECTARES} />
         <Row justify='space-between'>
-          <Col {...responsiveFarmableAreaAcre}>
+          <Col {...responsiveFarmableAcre}>
             <Item
-              name='farmableAreaAcre'
               label='Agricultável'
-              rules={farmableAreaAcreRules}
+              name={ProducerEnum.FARMABLE_ACRE}
+              rules={farmableAcreRules}
             >
               <StyledInputNumber min={0} />
             </Item>
           </Col>
-          <Col {...responsiveVegetationAreaAcre}>
+          <Col {...responsiveVegetationAcre}>
             <Item
-              name='vegetationAreaAcre'
               label='Vegetação'
-              rules={vegetationAreaAcreRules}
+              name={ProducerEnum.VEGETATION_ACRE}
+              rules={vegetationAcreRules}
             >
               <StyledInputNumber min={0} />
             </Item>
           </Col>
-          <Col {...responsiveTotalAreaAcre}>
+          <Col {...responsiveTotalAcre}>
             <Item
-              name='totalAreaAcre'
               label='Total da fazenda'
-              rules={totalAreaAcreRules}
+              name={ProducerEnum.TOTAL_ACRE}
+              rules={totalAcreRules}
             >
               <StyledInputNumber min={0} />
             </Item>
           </Col>
         </Row>
-        <Item name='crops' label='Culturas plantadas' rules={cropsRules}>
+        <Item
+          label='Culturas plantadas'
+          name={ProducerEnum.CROPS}
+          rules={cropsRules}
+        >
           <StyledCheckboxGroup options={crops} />
         </Item>
         <Item>
-          <StyledButton label='CADASTRAR' />
+          <StyledButton
+            label={buttonLabel(editingProducer)}
+            disabled={submitDisabled}
+          />
         </Item>
       </Form>
     )
   }
 }
 
-const mapStateToProps = ({ address, crops, producers }: RootState) => ({
-  editingProducer: producers.editingProducer,
+const mapStateToProps = ({ address, crops }: RootState) => ({
   crops: crops.crops,
   cities: address.cities,
   citiesLoading: address.loading,
@@ -272,7 +326,6 @@ const mapDispatchToProps = {
   fetchCropsDispatched: fetchCrops,
   fetchCitiesDispatched: fetchCities,
   fetchUFsDispatched: fetchUFs,
-  setEditingProducerDispatched: setEditingProducer,
 }
 
 export const ProducerFormConnected = connect(

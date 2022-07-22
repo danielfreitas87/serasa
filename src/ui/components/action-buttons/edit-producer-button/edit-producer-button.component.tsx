@@ -6,12 +6,9 @@ import { setEditingProducer } from '@actions'
 import { ThemeColorEnum } from '@enums'
 
 interface Props extends IIcon {
-  setEditingProducerDispatched: (
-    producer: IProducer,
-    isEditing: boolean,
-  ) => void
+  setEditingProducerDispatched: (producer: IProducer) => void
   producer: IProducer
-  color?: keyof typeof ThemeColorEnum
+  color?: ThemeColorEnum
 }
 
 class EditProducerButton extends Component<Props> {
@@ -20,12 +17,12 @@ class EditProducerButton extends Component<Props> {
   }
 
   editProducer = () =>
-    this.props.setEditingProducerDispatched(this.props.producer, false)
+    this.props.setEditingProducerDispatched(this.props.producer)
 
   render() {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { setEditingProducerDispatched, producer, ...rest } = this.props
-    return <StyledIcon {...rest} onClick={this.editProducer} size={18} />
+    const { producer, setEditingProducerDispatched, ...rest } = this.props
+    return <StyledIcon {...rest} onClick={this.editProducer} />
   }
 }
 

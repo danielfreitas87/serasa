@@ -20,7 +20,7 @@ export const AuthRoutes: Array<IMenuItem> = [
       },
       {
         render: <ProducerEditPageConnected />,
-        label: 'Editar Produtores',
+        label: 'Criar/Editar Produtores',
       },
     ],
   },

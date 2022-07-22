@@ -17,11 +17,11 @@ const PRODUCER_REDUCER_ERROR_MESSAGE =
   'Houve um erro ao acessar a plataforma. Tente novamente mais tarde!'
 
 const producersInitialState: IProducerState = {
-  producers: [],
+  producers: null,
   editingProducer: null,
   isEditing: false,
-  error: '',
   loading: false,
+  error: '',
 }
 
 export default function producersReducer(

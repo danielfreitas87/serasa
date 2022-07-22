@@ -1,2 +1,3 @@
+export { totalAcreValidator } from './total-acre.validator'
 export { documentValidator } from './document.validator'
-export { totalAreaAcreValidator } from './total-area-acre.validator'
+export { minLengthRules } from './min-length.validator'

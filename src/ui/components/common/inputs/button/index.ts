@@ -18,6 +18,7 @@ export const StyledButton = styled(Button)`
       const themeColor = getThemeColor(props.theme, props?.color)
       return (
         themeColor &&
+        !props.disabled &&
         [
           `background-color: ${themeColor};`,
           `border-color: ${themeColor};`,

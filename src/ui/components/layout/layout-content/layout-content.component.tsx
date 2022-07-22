@@ -8,14 +8,23 @@ import { MenuInfo } from 'rc-menu/lib/interface'
 import { ItemType } from 'antd/lib/menu/hooks/useItems'
 import { connect } from 'react-redux'
 import { RootState } from '@store'
-import { changeCurrentPage, setEditingProducer } from '@actions'
+import {
+  changeCurrentPage,
+  fetchCrops,
+  fetchProducers,
+  setEditingProducer,
+} from '@actions'
 
 const { Content, Sider } = Layout
+const FIRST_INDEX = 0
+const SECOND_INDEX = 1
 
 interface Props extends BasicProps {
   currentPage: number
   changeCurrentPageDispatched: (pageNumber: number) => void
   setEditingProducerDispatched: (producer: IProducer | null) => void
+  fetchCropsDispatched: () => void
+  fetchProducersDispatched: () => void
 }
 
 type State = {
@@ -38,30 +47,27 @@ class LayoutContent extends Component<Props, State> {
   componentDidMount() {
     this.setState({ menuItems: getMenuItems(AuthRoutes) })
     this.setState({ routes: getRoutes(AuthRoutes) })
+    this.props.fetchCropsDispatched()
+    this.props.fetchProducersDispatched()
   }
 
   changeSiderItem({ keyPath }: MenuInfo) {
     this.props.setEditingProducerDispatched(null)
-    this.props.changeCurrentPageDispatched(Number(keyPath['0']))
+    this.props.changeCurrentPageDispatched(Number(keyPath[FIRST_INDEX]))
   }
 
   render() {
-    const {
-      currentPage,
-      changeCurrentPageDispatched,
-      setEditingProducerDispatched,
-      ...rest
-    } = this.props
+    const { currentPage, className } = this.props
     const { menuItems, routes } = this.state
     return (
-      <Content {...rest}>
+      <Content className={className}>
         <Layout>
-          <Sider breakpoint='md' collapsedWidth={0}>
+          <Sider breakpoint='md' collapsedWidth={FIRST_INDEX} width={220}>
             <Menu
               mode='inline'
               items={menuItems}
               onClick={this.changeSiderItem}
-              defaultOpenKeys={['1']}
+              defaultOpenKeys={[SECOND_INDEX.toString()]}
               selectedKeys={[currentPage.toString()]}
             />
           </Sider>
@@ -79,6 +85,8 @@ const mapStateToProps = ({ page }: RootState) => ({
 const mapDispatchToProps = {
   changeCurrentPageDispatched: changeCurrentPage,
   setEditingProducerDispatched: setEditingProducer,
+  fetchCropsDispatched: fetchCrops,
+  fetchProducersDispatched: fetchProducers,
 }
 
 export const LayoutContentConnected = connect(

@@ -1,11 +1,10 @@
-import BaseService from './base.service'
 import { IProducer } from '@interfaces'
 import { createOrUpdateProducer } from '@helpers'
 import { MOCKED_PRODUCERS } from './producer.mocked'
 
 const LOCAL_STORAGE_PRODUCERS_KEY = '@producers'
 
-export class ProducerService extends BaseService {
+export class ProducerService {
   getProducers() {
     const producersDataUnparsed = localStorage.getItem(
       LOCAL_STORAGE_PRODUCERS_KEY,

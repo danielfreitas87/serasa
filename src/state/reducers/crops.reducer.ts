@@ -6,9 +6,9 @@ const CROPS_REDUCER_ERROR_MESSAGE =
   'Houve um erro ao acessar a plataforma. Tente novamente mais tarde!'
 
 const cropsInitialState: ICropsState = {
-  crops: [],
-  error: '',
+  crops: null,
   loading: false,
+  error: '',
 }
 
 export default function cropsReducer(

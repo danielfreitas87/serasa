@@ -11,9 +11,6 @@ function getColor(theme: any, color: keyof typeof ThemeColorEnum) {
   }
 }
 
-export function getThemeColor(
-  theme: any,
-  color: keyof typeof ThemeColorEnum | undefined,
-) {
+export function getThemeColor(theme: any, color?: keyof typeof ThemeColorEnum) {
   return getColor(theme, color || ThemeColorEnum.primary)
 }

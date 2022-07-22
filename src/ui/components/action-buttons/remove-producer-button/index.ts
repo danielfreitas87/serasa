@@ -5,6 +5,7 @@ import { ThemeColorEnum } from '@enums'
 
 const defaultProps = {
   color: ThemeColorEnum.secondary,
+  size: 18,
 }
 
 export const StyledRemoveProducerButton = styled(RemoveProducerButtonConnected)`

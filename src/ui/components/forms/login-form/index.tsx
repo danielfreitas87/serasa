@@ -3,6 +3,7 @@ import { Alert, Form, Input } from 'antd'
 import { StyledButton } from '@components'
 import { loginRules } from '@validations'
 import { IUserLogin } from '@interfaces'
+import { LoginEnum } from '@enums'
 
 const { Item } = Form
 
@@ -19,10 +20,20 @@ export class LoginForm extends Component<Props> {
     const { emailRules, passwordRules } = loginRules
     return (
       <Form layout='vertical' onFinish={this.submitForm}>
-        <Item name='email' label='Seu e-mail' required rules={emailRules}>
+        <Item
+          label='Seu e-mail'
+          name={LoginEnum.EMAIL}
+          rules={emailRules}
+          required
+        >
           <Input />
         </Item>
-        <Item name='password' label='Sua senha' required rules={passwordRules}>
+        <Item
+          label='Sua senha'
+          name={LoginEnum.PASSWORD}
+          rules={passwordRules}
+          required
+        >
           <Input type='password' />
         </Item>
 

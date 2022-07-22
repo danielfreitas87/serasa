@@ -7,7 +7,7 @@
       "@enums": ["src/enums"],
       "@helpers": ["src/helpers"],
       "@interfaces": ["src/interfaces"],
-      "@pages": ["src/ui/pages/"],
+      "@pages": ["src/ui/pages"],
       "@reducers": ["src/state/reducers"],
       "@routes": ["src/routes"],
       "@sagas": ["src/state/sagas"],
